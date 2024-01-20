@@ -20,7 +20,8 @@
 
 7. 手動辨識羊隻活動量: Poetry run python .\modules\test_video.py
 
-8. 訓練：位置在yolo資料夾裡的datasets目錄，因檔案過大，因此存放至雲端硬碟，要使用時請先下載下來。
+8. 訓練：Poetry run python .\modules\train.py
+	- 資料集位置在yolo資料夾裡的datasets目錄，因檔案過大，因此存放至雲端硬碟，要使用時請先下載下來，也可使用自己的資料集。
 
 = = = = = = = = 專案架構說明 = = = = = = = =
 + .venv(可刪除): Poetry install完後會出現的虛擬環境目錄，套件會安裝在裡面。
