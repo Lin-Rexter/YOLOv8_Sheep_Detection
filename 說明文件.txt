@@ -2,6 +2,7 @@
 1. 先安裝Python專案管理工具(安裝完後記得重開終端機): Poetry
 	- 終端機使用Windows Terminal - Powershell 7
 	- 如呼叫失敗，將路徑新增至環境變數: `C:\Users\{你的使用者名稱}\AppData\Roaming\pypoetry\venv\Scripts`
+	- 安裝完後，Poetry設置虛擬目錄安裝到專案裡而非預設位置：poetry config virtualenvs.in-project true
 
 2. cd到專案目錄，安裝套件並建立虛擬環境: Poetry install
 
