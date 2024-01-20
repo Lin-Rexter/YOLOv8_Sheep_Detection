@@ -117,6 +117,6 @@
 </details>
 
 ## License
-**[MIT](https://github.com/Lin-Rexter/NPUST-RentRoom/blob/1b39ab0240b4e2440e34abccb242a9105669cf86/LICENSE)**
+**[MIT](.\LICENSE)**
 
 
