@@ -13,11 +13,13 @@
 
 4. 手動辨識前置作業(非重要)：訓練結果runs資料夾裡的評估資料已壓縮，如要查看請先解壓縮，但不影響辨識腳本運作
 
-5. 手動辨識羊隻身分ID: Poetry run python .\modules\test_img.py
+5. 手動辨識-測試資料：因檔案過大，已存放至雲端空間(有連結)，要使用時請再下載下來。
 
-6. 手動辨識羊隻活動量: Poetry run python .\modules\test_video.py
+6. 手動辨識羊隻身分ID: Poetry run python .\modules\test_img.py
 
-7. 訓練：位置在yolo資料夾裡的datasets目錄，因檔案過大，因此存放至雲端硬碟，要使用時請先下載下來。
+7. 手動辨識羊隻活動量: Poetry run python .\modules\test_video.py
+
+8. 訓練：位置在yolo資料夾裡的datasets目錄，因檔案過大，因此存放至雲端硬碟，要使用時請先下載下來。
 
 = = = = = = = = 專案架構說明 = = = = = = = =
 + .venv(可刪除): Poetry install完後會出現的虛擬環境目錄，套件會安裝在裡面。
