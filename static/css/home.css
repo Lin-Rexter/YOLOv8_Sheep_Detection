@@ -1,0 +1,12 @@
+/* 背景樣式 */
+.bg_image {
+    background: url("../images/bg_home.jpg") center/cover no-repeat fixed;
+}
+
+img,
+video {
+    max-width: 100%;
+    max-height: 300px;
+    display: block;
+    /* 將 display 設為 block */
+}

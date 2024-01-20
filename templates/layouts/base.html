@@ -1,0 +1,329 @@
+{# 設定基底模板(可被繼承) #}
+
+{% block Html %}
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    {# block代表在繼承的網頁中可以自訂的內容區塊，block後面加上自訂標題 #}
+    {# 沒有使用block包起來的區塊，在被其他網頁繼承的時候內容原封不動搬移且無法自訂內容 #}
+    {% block Head %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=yes" />
+    <meta name="Description" content="YOLO-NAS羊圈管理-{{ self.Title() }}" />
+    <meta name="keywords" content="YOLO-NAS羊圈管理" />
+    <meta name="author" content="第一組" />
+    <link rel='icon' type='image/x-icon' href='{% block Web_Icon %}{{ url_for('static', filename='./images/sheep_icon.png') }}{% endblock Web_Icon %}' />
+    <title>YOLO-NAS羊圈管理 | {% block Title %}{% endblock Title %}</title>
+
+    <!-- Facebook Open Graph -->
+    <meta property="og:title" content="YOLO-NAS羊圈管理-{{ self.Title() }}" />
+    <meta property="og:type" content="website" />
+    <meta property="fb:app_id" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:image:alt" content="" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="" />
+    <meta property="og:image:height" content="" />
+    <meta property="og:site_name" content="YOLO-NAS羊圈管理-{{ self.Title() }}" />
+    <meta property="og:description" content="YOLO-NAS羊圈管理，辨識ID、活動量" />
+    <!-- Twitter Open Graph -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="第一組" />
+    <meta name="twitter:creator" content="第一組" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:title" content="YOLO-NAS羊圈管理-{{ self.Title() }}" />
+    <meta name="twitter:description" content="YOLO-NAS羊圈管理，辨識ID、活動量" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:image:alt" content="" />
+
+    <!-- 網址標準化 -->
+    <!--link rel="canonical" href="https://" /-->
+
+    <!-- Bootstrap-Flask CSS -->
+    {{ bootstrap.load_css() }}
+
+    <!-- Material Design wbe components
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"> -->
+
+    {% block CSS %}
+    <!-- Custom Style (自訂的CSS，只需更改filename) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css') }}" defer>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/dark_mode.css') }}" defer>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/toast.css') }}" defer>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/rwd.css') }}" defer>
+    {% endblock CSS %}
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" as="font" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" defer />
+
+    <!-- Global site tag (gtag.js) - Google Analytics (之後再設定) -->
+    {% endblock Head %}
+</head>
+
+<body class="bg_image d-flex justify-content-center">
+    <div id="dark_style" class="container-fluid row d-flex justify-content-center">
+        <!-- 網頁頁首 -->
+        <div class="col-12">
+            <header id="header" class="row justify-content-center">
+                {% block Nav %}
+                <!-- 導覽列 -->
+                <nav id="nav" class="col p-4 navbar navbar-expand-md d-inline-flex">
+                    <a aria-current="page" href="." alt="YOLO羊圈管理"><i class="fa-solid fa-house fs-1"></i></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+                        <ul class="navbar-nav nav p-2 me-auto justify-content-end fw-bold fs-3">
+                            <li class="nav-item">
+                                <a class="nav-link mx-3 un" href="./train">訓練</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-3 un" href="./predict">預測</a>
+                            </li>
+                            <!--
+                            <li class="nav-item mx-3 dropdown">
+                                <a class="nav-link dropdown-toggle un " href="#" id="navbarDropdownMenuLink"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    資訊管理
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item un fw-bold" href="/tenant_managed"></a></li>
+                                    <li><a class="dropdown-item un fw-bold" href="/house_managed"></a></li>
+                                </ul>
+                            </li>
+                            -->
+                        </ul>
+                        <!-- 暗黑模式按鈕 -->
+                        <button type='button' id='dark_mode' class='light ms-2'>🌓</button>
+                    </div>
+                </nav>
+                {% endblock Nav %}
+            </header>
+        </div>
+
+        <!-- 跑馬燈 -->
+        <!--
+        {% block ticker %}
+        <div class="col-12 col-md-11 my-2">
+            <div class="ticker-container">
+                <div id="ticker">
+                    <p>施工中🚧</p>
+                </div>
+            </div>
+        </div>
+        {% endblock ticker %}
+        -->
+
+        <!-- 網頁主區塊 -->
+        {% block Main_Main %}
+        <div id="Outer_Main" class="col-12 col-md-11">
+            <!-- 彈出提示框(警告用) -->
+            <div class="toast-3">
+                <div id="liveToast-Waring" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true"
+                    data-bs-autohide="false">
+                    <!-- 標題 -->
+                    <div class="toast-header m-3 soft_title_white">
+                        <img src="" class="me-2" alt="">
+                        <strong class="me-auto fs-2 text-danger">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            警告
+                        </strong>
+                    </div>
+                    <!-- 內容 -->
+                    <div class="toast-body">
+                        <!-- 自訂訊息區塊 -->
+                        <p class="fw-bold fs-3 px-4">
+                            <span id="toast_waring_message"></span>
+                        </p>
+                        <!-- 按鈕 -->
+                        <div align="center" class="mt-3 toast-body-style-1">
+                            <button type="button" class="btn btn-primary btn-sm px-3 fs-3 un-green"
+                                data-bs-dismiss="toast">確認</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 彈出提示框(提示用) -->
+            <div class="toast-3">
+                <div id="liveToast-tip" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true"
+                    data-bs-autohide="false">
+                    <!-- 標題 -->
+                    <div class="toast-header m-3 soft_title_white">
+                        <img src="" class="me-2" alt="">
+                        <strong class="me-auto fs-2 text-success">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            提示
+                        </strong>
+                    </div>
+                    <!-- 內容 -->
+                    <div class="toast-body">
+                        <!-- 自訂訊息區塊 -->
+                        <p class="fw-bold fs-3 px-4">
+                            <span id="toast_tip_message"></span>
+                        </p>
+                        <!-- 按鈕 -->
+                        <div align="center" class="mt-3 toast-body-style-1">
+                            <button type="button" class="btn btn-primary btn-sm px-3 fs-3 un-green"
+                                data-bs-dismiss="toast">確認</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 主區塊內容 -->
+            {% block Outer_Main %}
+            <main id="Main" class="row d-flex justify-content-center">
+                {% block Main %} {% endblock Main %}
+            </main>
+            {% endblock Outer_Main %}
+        </div>
+        {% endblock Main_Main %}
+
+        <!-- 網頁頁尾 -->
+        <div class="col-12 col-md-11">
+            {% block Outer_Footer %}
+            <footer id="Footer" class="row d-flex justify-content-around gy-3">
+                {% block Footer %} {% endblock Footer %}
+            </footer>
+            {% endblock Outer_Footer %}
+        </div>
+    </div>
+
+    <!-- Bootstrap-Flask JS -->
+    {{ bootstrap.load_js() }}
+
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+        integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- 自動打字 Typed.js - https://github.com/mattboldt/typed.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"
+        integrity="sha512-hIlMpy2enepx9maXZF1gn0hsvPLerXoLHdb095CmRY5HG3bZfN7XPBZ14g+TUDH1aGgfLyPHmY9/zuU53smuMw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    {% block JS %}
+    <!-- Custom JS (自訂的JS，只需更改filename) -->
+    <script src="{{ url_for('static', filename='./js/dropdown_hover.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/auto_typed.js') }}"></script>
+    <script src="{{ url_for('static', filename='./js/toast.js') }}"></script>
+
+        {% block Script %}
+        <script>
+            // 彈出提示框(警告)
+            var toast_Waring = document.getElementById('liveToast-Waring'); // 警告彈出框
+            var message = document.getElementById('toast_waring_message'); // 寫入訊息
+
+            // 彈出提示框(提示)
+            var toast_tip = document.getElementById('liveToast-tip'); // 提示彈出框
+            var message_tip = document.getElementById('toast_tip_message'); // 寫入訊息
+
+            // 切換暗黑模式按鈕
+            let dark_mode = document.getElementById('dark_mode'); // 暗黑模式按鈕
+            let dark_style = document.getElementById('dark_style'); // 暗黑模式樣式
+
+
+            // 解析cookie
+            function parseCookie() {
+                let cookieObj = {};
+                let cookieAry = document.cookie.split(';');
+                let cookie = "";
+
+                for (var i = 0, l = cookieAry.length; i < l; ++i) {
+                    cookie = cookieAry[i].trim();
+                    cookie = cookie.split('=');
+                    cookieObj[cookie[0]] = cookie[1];
+                }
+                return cookieObj;
+            }
+
+            // 從cookie中取得特定名稱屬性值
+            async function getCookieByName(name) {
+                let value = parseCookie()[name];
+                if (value) {
+                    value = decodeURIComponent(value);
+                }
+                return value;
+            }
+
+            // 暗黑模式樣式
+            async function dark() {
+                dark_mode.classList.remove('light')
+                dark_mode.classList.add('dark')
+                dark_mode.innerText = "🌓";
+                dark_style.classList.add('dark_mode');
+            }
+
+            // 明亮模式樣式
+            async function light() {
+                dark_mode.classList.remove('dark')
+                dark_mode.classList.add('light')
+                dark_mode.innerText = "🌞";
+                dark_style.classList.remove('dark_mode');
+            }
+
+            // 檢查cookie的暗黑模式設置
+            async function check_dark() {
+                // 取得cookie的暗黑模式數值
+                var dark_value = await getCookieByName('dark');
+
+                // 確認暗黑模式是否已設為啟用
+                switch (dark_value) {
+                    case 'on':
+                        dark();
+                        break;
+                    case 'off':
+                        light();
+                        break;
+                }
+            }
+            check_dark()
+
+            // 暗黑模式按鈕點擊偵測
+            dark_mode.addEventListener('click', async () => {
+                var mode = dark_mode.classList;
+                switch (true) {
+                    case mode.contains('light'):
+                        dark();
+                        document.cookie = "dark=on"; // 儲存設定至cookie
+                        break;
+                    case mode.contains('dark'):
+                        light();
+                        document.cookie = "dark=off"; // 儲存設定至cookie
+                        break;
+                }
+            });
+
+            // 彈出提示框(tip為true呼叫提示框;反之警告框)
+            async function show_toast(messages, mode = null) {
+                switch (mode) {
+                    case "tip":
+                        Toast(toast_tip, message_tip, messages);
+                        break;
+                    case "warning":
+                        Toast(toast_Waring, message, messages);
+                        break;
+                    default:
+                        Toast(toast_tip, message_tip, messages);
+                }
+            }
+        </script>
+        {% endblock Script %}
+    {% endblock JS %}
+</body>
+
+</html>
+
+{% endblock Html %}

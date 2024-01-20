@@ -1,0 +1,15 @@
+path: C:\Users\Rexter\Desktop\yolo_v8\yolo\datasets\yolov8_ID_v2 #改自己的路徑
+
+train: ./train/images
+val: ./valid/images
+test: ./test/images
+
+nc: 9
+names: ['Sheep', 'Sheep2', 'Sheep3', 'Sheep4', 'Sheep5', 'Sheep6', 'Sheep7', 'Sheep8', 'Sheep9']
+
+roboflow:
+  workspace: npust-eunew
+  project: id_for_sheep
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/npust-eunew/id_for_sheep/dataset/2

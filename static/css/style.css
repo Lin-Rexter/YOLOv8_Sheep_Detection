@@ -1,0 +1,531 @@
+/* = = = 所有網頁共同元素 = = = */
+
+/* 載入內海字體 https://github.com/max32002/naikaifont */
+@font-face {
+    font-family: naikaifont;
+    src: url(https://cdn.jsdelivr.net/gh/max32002/naikaifont@1.0/webfont/NaikaiFont-Regular-Lite.woff2) format("woff2");
+    font-display: swap;
+}
+
+/*
+本地載入
+@font-face {
+    font-family: naikaifont;
+    src: url("../fonts/NaikaiFont-Regular-Lite.woff2") format("woff2");
+    font-display: swap;
+}
+*/
+
+html {
+    /* 1rem=10px 標準化大小，設大小時較好設定 */
+    font-size: 62.5% !important;
+}
+
+body {
+    /* 設置內海字體 */
+    font-family: 'NaikaiFont', sans-serif;
+    height: 100%;
+    font-size: 1.8vmin !important;
+}
+
+/* 反白校果 */
+::selection {
+    background-color: #fac281;
+    color: #000;
+}
+
+/* 反白校果(針對不同瀏覽器的兼容性) */
+::-moz-selection {
+    background-color: #fac281;
+    color: #000;
+}
+
+/* 網頁導覽列樣式 */
+#header>nav {
+    background: linear-gradient(45deg, #eabfa0, #b0d6e3, #a6e3cc);
+    /*box-shadow: 0px 0px 6px 3px #c0bdc6;
+    border: 6px dashed #c0bdc6;*/
+    border-radius: 9px;
+}
+
+/* 網頁主區塊樣式 */
+#Main {
+    position: sticky;
+    align-items: center;
+    justify-content: center;
+    /*
+    flex-flow: column nowrap;
+    */
+    z-index: 100;
+    margin: 20px 0;
+    background-color: rgb(238, 238, 238);
+    box-shadow: inset 0px 0px 30px 5px rgb(140, 180, 215);
+    padding-top: 5rem;
+    padding-bottom: 10rem;
+}
+
+/* 網頁頁尾區塊樣式 */
+#Footer {
+    position: relative;
+    display: flex;
+    background-color: rgb(233, 233, 233);
+    padding: 15px;
+    margin: 0 0 20px 0;
+    margin-bottom: 10px !important;
+    box-shadow: inset 0px 0px 20px 1px rgb(228, 168, 100);
+    opacity: 0.9;
+    z-index: 100;
+}
+
+/* 跑馬燈 */
+.ticker-container {
+    position: relative;
+    top: 10px;
+    left: auto;
+    right: auto;
+    bottom: 0;
+    height: auto;
+    width: 100%;
+    padding: 0px;
+    background: linear-gradient(45deg, rgb(196, 198, 223), rgb(187, 218, 208), rgb(228, 184, 184));
+    box-shadow: 0px 0px 6px 1px rgb(189, 189, 188);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#ticker {
+    display: flex;
+    color: currentColor;
+    padding: 0px;
+    font-size: 3rem;
+    white-space: nowrap;
+    /*perspective: 5px;*/
+    /*perspective-origin: 300% 300%;*/
+    animation: ticker_move 12s infinite cubic-bezier(0, 0, 1, 1);
+}
+
+.ticker-container:hover>#ticker {
+    animation-play-state: paused;
+}
+
+#ticker p {
+    margin-bottom: 0;
+}
+
+@keyframes ticker_move {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+
+/* END 導覽列 - 下拉式選單 */
+.un {
+    display: inline-block;
+    padding-bottom: 3px;
+    background-image: linear-gradient(rgb(80, 255, 200), rgb(80, 255, 200));
+    background-position: 0 100%;
+    background-size: 0% 3px;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s, background-position 0s 0.3s;
+}
+
+.un:hover {
+    background-position: 100% 100%;
+    background-size: 100% 3px;
+}
+
+.un-red {
+    display: inline-block;
+    padding-bottom: 3px;
+    background-image: linear-gradient(rgb(255, 0, 0), rgb(255, 0, 0));
+    background-position: 50% 100%;
+    background-size: 0% 3px;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s, background-position 0s 0.3s;
+}
+
+.un-red:hover {
+    background-position: 50% 100%;
+    background-size: 100% 3px;
+}
+
+.un-green {
+    display: inline-block;
+    padding-bottom: 3px;
+    background-image: linear-gradient(rgb(30, 255, 0), rgb(30, 255, 0));
+    background-position: 50% 100%;
+    background-size: 0% 3px;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s, background-position 0s 0.3s;
+}
+
+.un-green:hover {
+    background-position: 50% 100%;
+    background-size: 100% 3px;
+}
+
+.hr_my {
+    border: none;
+    border-top: 5px double #333;
+    color: #333;
+    overflow: visible;
+    text-align: center;
+    height: 50px;
+}
+
+/*分隔線樣式*/
+.hr {
+    border: 0;
+    height: 3px;
+    border-radius: 50%;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+
+/* 網頁統一背景樣式 */
+.bg_image {
+    background: url("../images/bg_home.jpg") center/cover no-repeat fixed;
+}
+
+
+/* 網頁統一背景效果樣式 */
+.bg_image::before {
+    display: block;
+    position: absolute;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(0, 0, 0, 0)), linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0)), linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0)), linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(0, 0, 0, 0));
+    height: 40%;
+    width: 100%;
+    top: 0;
+    content: '';
+}
+
+
+/* 毛玻璃效果*/
+.glass_morphism {
+    background-color: transparent !important;
+    backdrop-filter: blur(6px) !important;
+}
+
+/*
+.glass_morphism p {
+    filter: drop-shadow(5px 5px 8px rgba(102, 102, 102, 0.7));
+}
+*/
+
+
+/* 導覽列 & 下拉式選單 */
+@media all and (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+        display: none;
+    }
+
+    .navbar .nav-item:hover .dropdown-menu {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        grid-gap: 10px 10px;
+    }
+
+    .navbar .nav-item .dropdown-menu {
+        margin-top: 1.5px;
+    }
+}
+
+.dropdown-menu {
+    background: #e6e7ee;
+    border: 2px solid #d1d9e6;
+    box-shadow: -3px -3px 7px #fff, 2px 2px 5px #b8b9be;
+    border-radius: 10px;
+    padding: 1rem;
+    z-index: 999999 !important;
+}
+
+/* 導覽列 & 下拉式選單 */
+@media screen and (max-width:992px) {
+    .dropdown-menu {
+        background: linear-gradient(45deg, #eaa0a0, #b0b4e3, #a6e3d0);
+        border: none !important;
+        box-shadow: inset 0px 0px 20px linear-gradient(45deg, #eaa0a0, #b0b4e3, #a6e3d0) !important;
+        padding: 0.05rem 0.8rem;
+        margin-top: 4.5px !important;
+    }
+
+    .dropdown-menu>li {
+        margin: 0.8rem 0;
+    }
+
+    /* border與background色差: -13 +17 -13 */
+    .dropdown-menu>li>a {
+        border-radius: 12px;
+        box-shadow: none !important;
+        border-top: 1.5px solid rgba(153, 244, 195, 0.7) !important;
+        border-left: 2.5px solid rgba(247, 143, 173, 0.8) !important;
+        border-right: 1.5px solid rgba(153, 244, 195, 0.7) !important;
+        border-bottom: 2.5px solid rgba(247, 143, 173, 0.8) !important;
+    }
+}
+
+.dropdown-menu>li {
+    border-radius: 12px;
+    padding: 0;
+}
+
+.dropdown-menu>li>a {
+    border-radius: 12px;
+    box-shadow: 6px 6px 12px #b8b9be, -6px -6px 12px #fff;
+    border: 1px solid #d1d9e6;
+    padding: 1.1rem;
+    margin: 0;
+    max-width: 100%;
+}
+
+.dropdown-menu>li>a:hover {
+    background-color: #e6e7ee;
+    border-color: #d1d9e6;
+    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+    color: rgb(50, 50, 50);
+    transition: all .15s ease-in !important;
+}
+
+.dropdown-menu>li>a:active {
+    background-color: #e6e7ee;
+    border-color: #d1d9e6;
+    box-shadow: inset 3px 3px 5px 3px #b8b9be, inset -2px -2px 7px 3px #fff;
+    color: rgb(0, 0, 0);
+}
+
+/* END 導覽列 & 下拉式選單 */
+
+
+.outer {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+}
+
+.list {
+    display: flex;
+    position: relative;
+    word-wrap: break-word !important;
+    /*一個單字為單位，進行換行動作*/
+}
+
+
+.hover_white {
+    color: rgb(255, 39, 39) !important;
+    padding: 0.1rem 0.6rem;
+}
+
+
+.hover_white:hover>.fa-trash {
+    color: rgb(255, 255, 255) !important;
+    animation: shake 0.8s ease-out infinite;
+}
+
+@keyframes shake {
+
+    0%,
+    20% {
+        transform: skewX(0deg);
+    }
+
+    21%,
+    25% {
+        transform: skewX(-18deg);
+    }
+
+    26%,
+    30% {
+        transform: skewX(+18deg);
+    }
+
+    31%,
+    35% {
+        transform: skewX(-12deg);
+    }
+
+    36%,
+    40% {
+        transform: skewX(+12deg);
+    }
+
+    41%,
+    45% {
+        transform: skewX(-6deg);
+    }
+
+    46%,
+    50% {
+        transform: skewX(+6deg);
+    }
+
+    51%,
+    100% {
+        transform: skewX(0deg);
+    }
+}
+
+.img_container {
+    position: relative;
+    display: flex;
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 6px;
+}
+
+.img_container::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: .5s ease all;
+    border: 6px solid #4f545c;
+}
+
+.img_container img {
+    width: 100%;
+    height: auto;
+    transition: .3s ease all;
+    object-fit: cover;
+}
+
+.img_container:hover img {
+    transform: scale(1.2);
+}
+
+/* 擬物化設計風格Neumorphism(Soft UI) - Button */
+
+
+.soft_btn_aqua {
+    --color: #f14646;
+    --color-deep: #b93333;
+    --color-border: #d53d3d;
+    padding: 0.6rem 1.8rem;
+    border-radius: 15px !important;
+    border: 3px solid var(--color-border) !important;
+    box-shadow: 4px 4px 8px var(--color-deep), -4px -4px 8px var(--color) !important;
+    font-size: calc(1vh + 0.5rem) !important;
+    opacity: 0.9;
+}
+
+
+.soft_btn_green {
+    --color: #22a769;
+    --color-deep: #146941;
+    --color-border: #187f4f;
+    padding: 0.6rem 1.8rem;
+    border-radius: 15px !important;
+    border: 3px solid var(--color-border) !important;
+    box-shadow: 4px 4px 8px var(--color-deep), -4px -4px 8px var(--color) !important;
+    font-size: calc(1vh + 0.5rem) !important;
+    opacity: 0.9;
+}
+
+.soft_btn_blue {
+    --color: #4e95ff;
+    --color-deep: #094fb9;
+    --color-border: #1665dc;
+    padding: 0.6rem 1.8rem;
+    border-radius: 15px !important;
+    border: 3px solid var(--color-border) !important;
+    box-shadow: 4px 4px 8px var(--color-deep), -4px -4px 8px var(--color) !important;
+    font-size: calc(1vh + 0.5rem) !important;
+    opacity: 0.9;
+}
+
+.soft_btn_yellow {
+    --color: #ffc44e;
+    --color-deep: #c4a509;
+    --color-border: #e2b52c;
+    padding: 0.6rem 1.8rem;
+    border-radius: 15px !important;
+    border: 3px solid var(--color-border) !important;
+    box-shadow: 4px 4px 8px var(--color-deep), -4px -4px 8px var(--color) !important;
+    font-size: calc(1vh + 0.5rem) !important;
+    opacity: 0.9;
+}
+
+.soft_btn_blue:hover,
+.soft_btn_green:hover,
+.soft_btn_yellow:hover,
+.soft_btn_aqua:hover {
+    box-shadow: 1px 1px 8px var(--color-deep), -1px -1px 8px var(--color) !important;
+    transition: 0.5s !important;
+}
+
+.soft_btn_blue:active,
+.soft_btn_green:active,
+.soft_btn_yellow:active,
+.soft_btn_aqua:active {
+    box-shadow: inset 4px 4px 12px var(--color-deep), inset -4px -4px 12px var(--color) !important;
+    transition: 0.5s !important;
+}
+
+
+/* 擬物化設計風格Neumorphism(Soft UI) - 外框 */
+
+.soft_title_white {
+    border-radius: 50px !important;
+    background: #e6e7ee !important;
+    box-shadow: 6px 6px 12px #b8b9be, -6px -6px 12px #fff;
+    border: 1px solid #d1d9e6;
+}
+
+.soft_text_white {
+    border-radius: 10px !important;
+    background: rgb(218, 219, 224) !important;
+    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff !important;
+    border: 1px solid #d1d9e6;
+}
+
+.soft_text_white:focus {
+    background: #e6e7ee !important;
+}
+
+/* select option */
+
+.select-items {
+    font-weight: bold;
+    color: #e4e3e3;
+    background-color: #6b7075;
+    padding: 0.8rem 1.6rem;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    border-radius: 15px !important;
+    cursor: pointer;
+    user-select: none;
+    z-index: 99;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 98%;
+    background-position-y: 50%;
+    background-size: 5rem;
+}
+
+select option:hover,
+select option:focus,
+select option:active {
+    background: linear-gradient(#000000, #000000);
+    background-color: #000000 !important;
+    color: #ffed00 !important;
+}
+
+select option:checked {
+    background: linear-gradient(#d6d6d6, #d6d6d6);
+    background-color: #d6d6d6 !important;
+    color: #000000 !important;
+}

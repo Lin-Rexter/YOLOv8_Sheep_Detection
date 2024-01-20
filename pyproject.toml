@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "yolo_v8"
+version = "0.0.1"
+description = "使用YOLO-V8模型偵測羊隻ID、活動量"
+authors = ["Lin-Rexter <aaaa35963596@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+ultralytics = "^8.1.0"
+python-dotenv = "^1.0.0"
+flask = {extras = ["async"], version = "^3.0.0"}
+pymongo = "^4.6.1"
+bootstrap-flask = "^2.3.3"
+motor = "^3.3.2"
+nest-asyncio = "^1.5.8"
+torch = { url="https://download.pytorch.org/whl/cu121/torch-2.1.1%2Bcu121-cp310-cp310-win_amd64.whl" }
+torchaudio = { url="https://download.pytorch.org/whl/cu121/torchaudio-2.1.1%2Bcu121-cp310-cp310-win_amd64.whl" }
+torchvision = { url="https://download.pytorch.org/whl/cu121/torchvision-0.16.1%2Bcu121-cp310-cp310-win_amd64.whl" }
+python-magic-bin = "^0.4.14"
+opencv-python = "^4.9.0.80"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

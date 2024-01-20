@@ -1,0 +1,161 @@
+{# 要繼承的模板 #}
+{% extends "./layouts/base.html" %}
+
+<!--
+{# 設置網頁的logo 
+{% block Web_Icon %}https://{% endblock Web_Icon %}
+#}
+-->
+
+{% block Head %}
+{# 因使用block Head區塊繼承，所以須使用super()繼承模板的內容，如果沒有加super()，只會留下如下方的style #}
+{{ super() }}
+{% endblock Head %}
+
+{# 設置網頁標題 #}
+{% block Title %}羊隻辨識網頁{% endblock Title%}
+
+{# 設置網頁CSS #}
+{% block CSS %}
+{# super(): 繼承原本模板設定的 #}
+{{ super() }}
+
+<!-- Custom Style (自訂的CSS，只需更改filename)-->
+<link rel="stylesheet" href="{{ url_for('static', filename='./css/predict.css') }}" defer>
+{% endblock CSS %}
+
+
+{# 網頁主區塊 #}
+{% block Outer_Main %}
+<main id="Main" class="row d-flex justify-content-center glass_morphism border border-3 border-primary-subtle rounded rounded-4">
+    {% block Main %}
+    <!-- 主區塊標題 -->
+    <div class="col-12 pb-4 align-content-center">
+        <figure class="text-center">
+            <blockquote class="blockquote">
+                <p class="display-1">YOLO羊圈管理🐑</p>
+            </blockquote>
+            <figcaption class="blockquote-footer fs-2">
+                <span id="Auto_write"></span>
+            </figcaption>
+        </figure>
+    </div>
+
+    <!-- 主區塊內容 -->
+    <div class="col-12 p-2">
+        <div class="row g-5 justify-content-evenly m-0">
+            <!-- 左 -->
+            <div id="pre-left" class="col-11 col-sm-9 col-lg-8 col-xl-5 border border-3 bg-success bg-opacity-25 p-5 rounded rounded-4">
+                <div class="row gy-3 d-flex justify-content-center">
+                    <p id="pre-left-title" class="fw-bold fs-1 text-center">上傳圖片或影片</p>
+
+                    <div class="input-group">
+                        <input type="file" class="fs-4 form-control" id="fileInput" aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*,video/*">
+                        <button class="btn btn-secondary fs-4" type="button" id="inputGroupFileAddon04" onclick="uploadFile()">確認</button>
+                    </div>
+
+                    <img id="previewImage" />
+                    <video id="previewVideo" controls></video>
+                </div>
+            </div>
+
+            <!-- 右 -->
+            <div id="pre-right" class="col-11 col-sm-9 col-lg-8 col-xl-5 border border-3 bg-danger bg-opacity-10 p-5 rounded rounded-4">
+                <div class="row gy-3 d-flex justify-content-center">
+                    <p id="pre-right-title" class="fw-bold fs-1 text-center">預測結果</p>
+
+                    <button type="button" class="col-12 col-sm-8 col-md-6 btn btn-outline-primary btn fw-bold fs-3 border border-primary border-3" onclick="recognize()">開始辨識</button>
+
+                    <div id="result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock Main %}
+</main>
+{% endblock Outer_Main %}
+
+
+{# 網頁腳尾 #}
+{% block Outer_Footer %}
+<footer id="Footer" class="row d-flex glass_morphism justify-content-around gy-3 border border-3 border-warning-subtle rounded rounded-4">
+    {% block Footer %}
+    <div class="col-12 col-md-6 border border-3 border-dark d-flex justify-content-center m-sm-0 bg-dark-subtle rounded rounded-4" >
+        <p class="fw-bold fs-2 m-3">最後修改: 2024-01-11</p>
+    </div>
+    {% endblock Footer %}
+</footer>
+{% endblock Outer_Footer %}
+
+
+{# 網頁JS #}
+{% block JS %}
+{# super(): 繼承原本模板設定的 #}
+{{ super() }}
+
+<script>
+    function uploadFile() {
+        var fileInput = document.getElementById('fileInput');
+        var previewImage = document.getElementById('previewImage');
+        var previewVideo = document.getElementById('previewVideo');
+        var resultContainer = document.getElementById('result');
+
+        var file = fileInput.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                if (file.type.startsWith('image')) {
+                    previewImage.src = e.target.result;
+                    previewVideo.style.display = 'none';
+                    previewImage.style.display = 'block';
+                } else if (file.type.startsWith('video')) {
+                    previewVideo.src = e.target.result;
+                    previewImage.style.display = 'none';
+                    previewVideo.style.display = 'block';
+                }
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function recognize() {
+        var resultContainer = document.getElementById('result');
+        var previewImage = document.getElementById('previewImage');
+        var previewVideo = document.getElementById('previewVideo');
+
+        // 這裡的示範僅將左邊的內容複製到右邊
+        if (previewImage.style.display === 'block') {
+            resultContainer.innerHTML = '<img src="' + previewImage.src + '" />';
+        } else if (previewVideo.style.display === 'block') {
+            resultContainer.innerHTML = '<video src="' + previewVideo.src + '" controls></video>';
+        }
+    }
+</script>
+
+<script>
+    // 自動打字
+    auto_write(
+        tag = "#Auto_write", // 要寫入的HTML標籤ID或Class
+        msgs = [
+            "使用高效又準確的<cite title='Source Title' class='text-success'>YOLO-NAS</cite>模型辨識",
+            "<cite title='Source Title' class='text-success'>^300精準辨識羊隻ID</cite>",
+            "<cite title='Source Title' class='text-info'>^500精準辨識活動量</cite>"
+        ], // 裡面有^1000、^500是延遲的秒數(毫秒)
+        {
+            speed: 70, // 打字速度
+            del_speed: 60, // 刪除速度
+            delay: 1200, // 延遲開始
+            del_delay: 3000, // 延遲刪除
+            cursor_style: "🐑", // 游標樣式
+            smart_del: true, // 預設，智慧刪除功能(只刪除字串不相同的部分)
+            loop: true // 不斷重複
+        }
+    )
+
+    // 彈出提示框
+    //show_toast("測試", 'tip');
+</script>
+{% endblock JS %}

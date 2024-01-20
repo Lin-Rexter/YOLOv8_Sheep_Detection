@@ -1,0 +1,15 @@
+path: C:\Users\Rexter\Desktop\yolo_v8\yolo\datasets\yolov8_ID #改自己的路徑
+
+train: ./train/images
+val: ./valid/images
+test: ./test/images
+
+nc: 9
+names: ['class 1', 'class 2', 'class 3', 'class 4', 'class 5', 'class 7', 'class 8', 'class 9', 'class6']
+
+roboflow:
+  workspace: 1228
+  project: 1228-tvxk7
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/1228/1228-tvxk7/dataset/3

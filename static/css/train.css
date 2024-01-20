@@ -1,0 +1,4 @@
+/* 背景樣式 */
+.bg_image {
+    background: url("../images/bg_train.jpg") center/cover no-repeat fixed;
+}

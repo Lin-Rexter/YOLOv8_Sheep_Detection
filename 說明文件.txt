@@ -1,0 +1,41 @@
+= = = = = = = = 使用方式 = = = = = = = =
+1. 先安裝Python專案管理工具(安裝完後記得重開終端機): Poetry
+	- 終端機使用Windows Terminal - Powershell 7
+	- 如呼叫失敗，將路徑新增至環境變數: `C:\Users\{你的使用者名稱}\AppData\Roaming\pypoetry\venv\Scripts`
+
+2. cd到專案目錄，安裝套件並建立虛擬環境: Poetry install
+
+3. 修改yaml(.\yolo_v8\yolo\yaml\*.yaml)的path路徑
+
+3. 執行網頁:
+	- 方式一: Poetry run python .\app.py
+	- 方式二: Poetry shell 然後 python .\app.py
+
+4. 手動辨識前置作業(非重要)：訓練結果runs資料夾裡的評估資料已壓縮，如要查看請先解壓縮，但不影響辨識腳本運作
+
+5. 手動辨識羊隻身分ID: Poetry run python .\modules\test_img.py
+
+6. 手動辨識羊隻活動量: Poetry run python .\modules\test_video.py
+
+7. 訓練：位置在yolo資料夾裡的datasets目錄，因檔案過大，因此存放至雲端硬碟，要使用時請先下載下來。
+
+= = = = = = = = 專案架構說明 = = = = = = = =
++ .venv(可刪除): Poetry install完後會出現的虛擬環境目錄，套件會安裝在裡面。
++ modules: 辨識ID、活動量腳本、其他自製函式 
++ static: flask用，存放靜態文件、網頁上傳的檔案
++ templates: flask用，網頁。
++ yolo: 
+	- datasets: 資料集
+	- yaml: 資料集配置檔
+	- pre_models: 預訓練Yolo v8模型
+	- runs: 存放訓練結果，訓練結果的資料夾名稱後面的數字是epochs次數
++ 測試資料:
+	- 羊隻身分辨識: 用來辨識羊隻ID的圖像
+	- 羊隻活動量辨識: 用來辨識活動量的影片
++ .env.example: 請改成.env，裡面存放資料庫連線設定
++ .gitignore: git上傳用，設置要忽略的資料夾或檔案
++ app.py: flask用，執行網頁
++ db.py: 自製的資料庫連線、CRUD模組
++ pyproject.toml: 紀錄Poetry安裝的套件，跟專案資訊
++ poetry.lock(可刪除): Poetry用，暫存檔
++ README.md: Github用，說明文件
